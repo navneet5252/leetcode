@@ -7,22 +7,21 @@ using namespace std;
 class Solution
 {
 	public:
+
     int gcd(int A, int B) 
 	{ 
-	    int divisor = (A>B)?B:A;
-	    int dividend = (A>B)?A:B;
-	    int rem = -1;
-	    while(rem!=0){
-	        rem = dividend%divisor;
-	        if(rem!=0){
-	        dividend = divisor;
-	        divisor = rem;
-	        }
-	        else{
-	            break;
-	        }
-	    }
-	    return divisor;
+	    if(A==0) return B;
+	     if(B==0) return A;
+	     
+	     while(A>0 && B>0){
+	         if(A>B){
+	             A=A-B;
+	         }
+	         else{
+	             B=B-A;
+	         }
+	     }
+	   return (A==0)?B:A;
 	} 
 };
 
