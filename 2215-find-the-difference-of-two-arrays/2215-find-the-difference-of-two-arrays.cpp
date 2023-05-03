@@ -1,46 +1,50 @@
 class Solution {
 public:
     vector<vector<int>> findDifference(vector<int>& nums1, vector<int>& nums2) {
-       vector<vector<int>>ans;
-        set<int>st;
-        // for(int i=0;i<nums1.size();i++){
-        //   copy.push_back(nums1[i]);
-        // }
-      for(int i=0;i<nums1.size();i++){
-          bool flag=true;
-        for(int j=0;j<nums2.size();j++){
-            if(nums1[i]==nums2[j]){
-              flag=false;
-              break;
+      set<int>st;
+        vector<vector<int>>ans(2,vector<int>(0));
+        sort(nums1.begin(),nums1.end());
+        sort(nums2.begin(),nums2.end());
+        int i=0,j=0;
+        while(i<nums1.size() && j<nums2.size()){
+           if(nums1[i]>nums2[j]){
+               j++;
+           }
+            else if(nums1[i]<nums2[j]){
+                st.insert(nums1[i]);
+                i++;
+            }
+            else{
+                i++;
             }
         }
-          if(flag){
-            st.insert(nums1[i]);
-          }
-      }
-        vector<int>vec;
+        while(i<nums1.size()){
+           st.insert(nums1[i++]);
+        }
         for(auto it:st){
-          vec.push_back(it);
+            ans[0].push_back(it);
         }
-        ans.push_back(vec);
-        vec.erase(vec.begin(),vec.end());
         st.erase(st.begin(),st.end());
-        for(int i=0;i<nums2.size();i++){
-          bool flag=true;
-           for(int j=0;j<nums1.size();j++){
-            if(nums2[i]==nums1[j]){
-              flag=false;
-              break;
+        i=0,j=0;
+        while(i<nums2.size() && j<nums1.size()){
+            if(nums2[i]<nums1[j]){
+                st.insert(nums2[i]);
+                i++;
+            }
+            else if(nums2[i]>nums1[j]){
+                j++;
+            }
+            else{
+              i++;
             }
         }
-            if(flag){
-              st.insert(nums2[i]);
-            }
+         while(i<nums2.size()){
+           st.insert(nums2[i++]);
         }
          for(auto it:st){
-          vec.push_back(it);
+            ans[1].push_back(it);
         }
-         ans.push_back(vec);
+        
         return ans;
     }
 };
