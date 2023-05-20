@@ -9,7 +9,7 @@ class Solution {
           
           rev(s,start,end);
       }
-    void add(string num1,int i ,string num2,int j,int carry,string &ans){
+    void add(string &num1,int i ,string &num2,int j,int carry,string &ans){
          //base case
           if(i<0 &&j<0){
               if(carry!=0){
