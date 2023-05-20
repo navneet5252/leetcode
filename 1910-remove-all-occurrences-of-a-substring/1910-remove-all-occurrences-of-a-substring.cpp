@@ -1,5 +1,5 @@
 class Solution {
-    void solve(string &s, string part){
+    void solve(string &s, string &part){
          if(s.find(part)==string::npos){
            return;
          }
