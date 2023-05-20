@@ -1,12 +1,15 @@
 class Solution {
     void solve(string &s, string &part){
-         if(s.find(part)==string::npos){
+        auto it=s.find(part);
+         if(it==string::npos){
            return;
          }
-        
-        if(s.find(part)!=string::npos){
-            s.erase(s.find(part),part.length());
+        else{
+              s.erase(it,part.length());
         }
+      
+          
+    
         solve(s,part);
     }
 public:
