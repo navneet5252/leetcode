@@ -8,49 +8,40 @@ using namespace std;
 //User function template for C++
 
 class Solution{
+    private:
+    void func(string s,int i,int &ans){
+        //base case
+        if(i==s.length()){
+            return;
+        }
+        
+        
+        if(s[i]<'0' || s[i] >'9'){
+            ans=-1;
+            return;
+        }
+       ans = ans*10 + (s[i]-'0');
+       func(s,i+1,ans);
+    }
   public:
     /*You are required to complete this method */
     int atoi(string s) {
-       int i = 0;
-       
-       //if space then ignore space
-       while(i<s.length() && s[i] ==' '){
-           i++;
-       }
-       //sign
-       bool sign = true; //true for +
-       if(s[i]=='-'){
-           sign = false;
-           i++;
-       }
-       else{
-           if(s[i]=='+'){
-               i++;
-           }
-       }
-       //ignoring zeros
-       while(i<s.length() && s[i]=='0'){
-           i++;
-       }
-       long long ans = 0;
-       while(i<s.length() && (s[i]>='0' && s[i]<='9')){
-            if(sign==false  &&  -(ans*10+(s[i]-'0'))<=INT_MIN){
-                   return INT_MIN;
-               }
-           else if(sign==true &&  (ans*10+(s[i]-'0'))>=INT_MAX){
-                   return INT_MAX;
-               }
-                ans = ans*10+(s[i]-'0');
-           i++;
-       }
-       if(i<s.length() && (s[i]<'0' || s[i]>'9')){
-           return -1;
-       }
-       if(sign == false){
-           ans*=-1;
-       }
-       
-       return (int)ans;
+        int i=0;
+        int ans = 0;
+        if(s[i]=='-' || s[i]=='+'){
+            i++;
+        }
+         if(s[i]<'0' || s[i] >'9'){
+            ans=-1;
+            return ans;
+        }
+      func(s,i,ans);
+       if(s[0] =='-'){
+            ans*= -1;
+            
+       } 
+       return ans;
+     
        
     }
 };
